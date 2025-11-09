@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ML Visual Notes (Hinglish) ? Linear & Logistic Regression</title>
+  <meta name="description" content="World-class visual notes for beginners in Hinglish (English script), covering Linear Regression and Logistic Regression." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">ML Visual Notes (Hinglish)</div>
+      <nav aria-label="Primary">
+        <a class="nav-link" href="#module-1">Module 1: Linear Regression</a>
+        <a class="nav-link" href="#module-2">Module 2: Logistic Regression</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <aside class="sidebar" aria-label="Modules navigation">
+      <h2 class="sidebar-title">Modules</h2>
+      <ol class="module-list">
+        <li><a href="#module-1" class="module-link active">1. Linear Regression (Depth 1)</a></li>
+        <li><a href="#module-2" class="module-link">2. Logistic Regression (Depth 1)</a></li>
+      </ol>
+      <div class="note">
+        Hinglish = Hindi in English script. Ultra-visual. No heavy maths.
+      </div>
+    </aside>
+
+    <section class="content">
+      <section class="hero">
+        <h1>Machine Learning: Linear & Logistic Regression</h1>
+        <p class="tagline">Super-beginner friendly, story-first explanations in Hinglish (English script) with interactive visuals.</p>
+      </section>
+
+      <section id="module-1" class="card">
+        <header class="card-header">
+          <h2>Module 1: Linear Regression (Depth 1)</h2>
+          <p class="muted">Goal: Trend line samajhna, error feel karna, aur fit ka magic dekhna ? bina formulas yaad kiye.</p>
+        </header>
+
+        <div class="stepper" role="tablist" aria-label="Linear Regression Steps">
+          <button class="step is-active" role="tab" aria-selected="true" data-step="0">1. Intuition</button>
+          <button class="step" role="tab" aria-selected="false" data-step="1">2. Error</button>
+          <button class="step" role="tab" aria-selected="false" data-step="2">3. Fit</button>
+          <button class="step" role="tab" aria-selected="false" data-step="3">4. Predict</button>
+        </div>
+
+        <div class="grid-2 gap-lg">
+          <div class="viz card-sub">
+            <canvas id="regCanvas" width="720" height="420" aria-label="Scatter plot with adjustable line"></canvas>
+            <div class="legend">
+              <span class="legend-item"><span class="dot dot-blue"></span> Data</span>
+              <span class="legend-item"><span class="line line-green"></span> Line (m x + b)</span>
+              <span class="legend-item"><span class="line line-red"></span> Residual (Error)</span>
+            </div>
+          </div>
+
+          <div class="controls card-sub">
+            <div class="explain" id="stepText" aria-live="polite"></div>
+
+            <div class="control-group">
+              <label for="slope">Slope m</label>
+              <input type="range" id="slope" min="-5" max="5" step="0.01" value="0.8" />
+              <div class="control-readout"><code id="slopeVal">0.80</code></div>
+            </div>
+
+            <div class="control-group">
+              <label for="intercept">Intercept b</label>
+              <input type="range" id="intercept" min="-10" max="10" step="0.1" value="1.0" />
+              <div class="control-readout"><code id="interceptVal">1.00</code></div>
+            </div>
+
+            <div class="control-group">
+              <label for="xpred">Predict at x</label>
+              <input type="range" id="xpred" min="0" max="10" step="0.1" value="5" />
+              <div class="control-readout">y? = <code id="ypredVal">?</code></div>
+            </div>
+
+            <div class="toggles">
+              <label class="toggle"><input type="checkbox" id="showResiduals" checked /> Show residuals</label>
+            </div>
+
+            <div class="actions">
+              <button id="autoFit" class="btn primary">Auto-Fit (Best m, b)</button>
+              <button id="resetData" class="btn">Reset Data</button>
+            </div>
+
+            <div class="metrics">
+              <div>Sum of Squared Errors (SSE): <strong id="sseVal">0.00</strong></div>
+              <div>m: <strong id="mOut">0.80</strong> &nbsp; b: <strong id="bOut">1.00</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <details class="footnote">
+          <summary>Quick recap (Hinglish)</summary>
+          <ul>
+            <li><strong>Line</strong>: Ek seedha trend batane ki koshish.</li>
+            <li><strong>Error</strong>: Har point se line tak ki distance (vertical).</li>
+            <li><strong>Fit</strong>: Aisi line dhundhna jisme total error sabse kam ho.</li>
+            <li><strong>Predict</strong>: Naye x ke liye y batana.</li>
+          </ul>
+        </details>
+      </section>
+
+      <section id="module-2" class="card">
+        <header class="card-header">
+          <h2>Module 2: Logistic Regression (Depth 1)</h2>
+          <p class="muted">Binary decisions ka game ? yes/no, 0/1. Curvy S-shape wali soch.</p>
+        </header>
+        <div class="grid-2 gap-lg">
+          <div class="viz card-sub">
+            <svg viewBox="0 0 600 320" role="img" aria-label="S-curve showing probability from 0 to 1">
+              <rect x="0" y="0" width="600" height="320" fill="#0b1324" rx="12"/>
+              <g transform="translate(56,24)">
+                <line x1="0" y1="256" x2="520" y2="256" stroke="#3d4663" stroke-width="1"/>
+                <line x1="0" y1="0" x2="0" y2="256" stroke="#3d4663" stroke-width="1"/>
+                <path d="M0,250 C150,250 200,130 260,130 C320,130 370,10 520,10" stroke="#60a5fa" stroke-width="3" fill="none"/>
+                <text x="-12" y="10" fill="#94a3b8" font-size="12">1</text>
+                <text x="-12" y="250" fill="#94a3b8" font-size="12">0</text>
+                <text x="480" y="290" fill="#94a3b8" font-size="12">x</text>
+                <text x="-10" y="280" fill="#94a3b8" font-size="12">p(y=1)</text>
+              </g>
+            </svg>
+          </div>
+          <div class="card-sub">
+            <p><strong>Hinglish intuition:</strong> Socho tumhe decide karna hai ki email <em>spam</em> hai ya nahi. Output sirf 0 ya 1. Linear line kabhi-kabhi 0 se niche ya 1 se upar chali jaati ? galat! Logistic Regression ek <em>S-curve</em> deta jo hamesha 0 aur 1 ke beech hai. Isi curve par hum probability p(y=1) padhte hain.</p>
+            <p class="muted">Coming up in next depth: thresholding (kab 0, kab 1), loss intuition (log-loss kyu?), aur feature scaling ka asar.</p>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>? <span id="year"></span> ML Visual Notes ? Hinglish Edition</div>
+      <div class="muted">Built for absolute beginners ? visuals first.</div>
+    </div>
+  </footer>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
